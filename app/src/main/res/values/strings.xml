@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">openMrsChallenge</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Kelvin Euclides</string>
+    <string name="nav_header_subtitle">kelvineuclides1@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Defininições</string>
+
+    <string name="menu_search">Pesquisar</string>
+    <string name="menu_history">Historico</string>
+    <string name="til_search_message">Indentificador ou Nome do Paciente</string>
+    <string name="bt_search_text">pesquisar</string>
+    <string name="patient_name">Patient Name - 0000000000/1990/00000</string>
+    <string name="data_nasc_1970_01_01_idade_51">Data Nasc: 1970-01-01 Idade: 51</string>
+    <string name="sexo_m">Sexo: M</string>
+    <string name="user_name">user name</string>
+    <string name="tv_hospital_name">Hospital Xpto</string>
+</resources>
