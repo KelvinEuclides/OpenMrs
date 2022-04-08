@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
+    //interface responsavel por fazer a requisição
     @GET("patient")
     Call<Results> patient(@Query("q") String q, @Query("v") String v, @Query("limit") int limit);
 

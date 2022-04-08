@@ -8,7 +8,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import mz.co.kelvin.openmrschallenge.util.BasicAuthInterceptor;
-import mz.co.kelvin.openmrschallenge.util.OkHttpUtils;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -31,6 +30,7 @@ public class ApiClient {
         return retrofit;
     }
 
+    //metodo responsavel para fazer o bypass de certificados ssl e autenticar a api
     public static OkHttpClient getUnsafeOkHttpClient(Interceptor interceptor) {
         try {
             // Create a trust manager that does not validate certificate chains
@@ -51,14 +51,14 @@ public class ApiClient {
                     }
             };
 
-            // Install the all-trusting trust manager
+            // Instalamos o certificado ssl
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            // Create an ssl socket factory with our all-trusting manager
+            // Criamos uma fábrica de soket ssl com o nosso gerente de confiança
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            okhttp3.Credentials.basic("teste", "Teste@345");
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory);
+            //autenticamos a api
             builder.addInterceptor(new BasicAuthInterceptor("teste", "Teste@345"));
             builder.hostnameVerifier((hostname, session) -> true);
             builder.addInterceptor(interceptor);

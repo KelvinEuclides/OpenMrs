@@ -11,9 +11,6 @@ import com.bumptech.glide.Glide;
 
 import mz.co.kelvin.openmrschallenge.databinding.ResultListItemBinding;
 import mz.co.kelvin.openmrschallenge.model.Results;
-import mz.co.kelvin.openmrschallenge.placeholder.PlaceholderContent.PlaceholderItem;
-
-
 
 public class MySearchRecyclerViewAdapter extends RecyclerView.Adapter<MySearchRecyclerViewAdapter.ViewHolder> {
 
@@ -31,7 +28,7 @@ public class MySearchRecyclerViewAdapter extends RecyclerView.Adapter<MySearchRe
 
     }
 
-    @SuppressLint("DefaultLocale")
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
           holder.tv_patient_name.setText(mValues.getResults().get(position).getDisplay());
@@ -50,10 +47,10 @@ public class MySearchRecyclerViewAdapter extends RecyclerView.Adapter<MySearchRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView tv_patient_name,tv_patient_birtdate,tv_patient_sexo,tv_patient_hospital;
-        public PlaceholderItem mItem;
 
         public ViewHolder(ResultListItemBinding binding) {
             super(binding.getRoot());
+            //colocamos os resultados ao modelo do template
             tv_patient_name = binding.tvPatientName;
             tv_patient_birtdate =binding.tvPatientBirtdate;
             tv_patient_sexo = binding.tvPatientSexo;
