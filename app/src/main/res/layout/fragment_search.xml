@@ -40,12 +40,50 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_search"
-        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/result_list_item" />
+
+    <ImageView
+        android:id="@+id/iv_message"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="208dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_search"
+        app:srcCompat="@drawable/ic_people_search"
+        tools:src="@drawable/ic_people_search"
+        tools:srcCompat="@drawable/ic_people_search" />
+
+    <TextView
+        android:id="@+id/tv_mensagem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/escreva_o_indetificador_do_paciente_ou_nome_para_realizar_uma_pesquisa"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_message"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/iv_message"
+        app:layout_constraintTop_toBottomOf="@+id/iv_message"
+        app:layout_constraintVertical_bias="0.161" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_patients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_patients" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

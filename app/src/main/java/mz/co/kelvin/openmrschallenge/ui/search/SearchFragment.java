@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import mz.co.kelvin.openmrschallenge.R;
 import mz.co.kelvin.openmrschallenge.adapter.MySearchRecyclerViewAdapter;
 import mz.co.kelvin.openmrschallenge.databinding.FragmentSearchBinding;
 import mz.co.kelvin.openmrschallenge.model.Result;
@@ -31,13 +32,15 @@ public class SearchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-
-
-
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = binding.rvPatients;
+        recyclerView.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.GONE);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         binding.btSearch.setOnClickListener(v -> {
+            binding.ivMessage.setVisibility(View.GONE);
+            binding.tvMensagem.setVisibility(View.GONE);
+            binding.progressBar.setVisibility(View.VISIBLE);
             String query = binding.tiletSearch.getText().toString();
             call = apiInterface.patient(query, "default", 100);
             call.enqueue(new Callback<Results>() {
@@ -45,7 +48,18 @@ public class SearchFragment extends Fragment {
                 public void onResponse(Call<Results> call1, retrofit2.Response<Results> response) {
                     if(response.isSuccessful()){
                         Results resource = response.body();
-                        recyclerView.setAdapter(new MySearchRecyclerViewAdapter(resource));
+                        if(resource.getResults().size()>0){
+                            recyclerView.setVisibility(View.VISIBLE);
+                            recyclerView.setAdapter(new MySearchRecyclerViewAdapter(resource));
+                            binding.progressBar.setVisibility(View.GONE);
+                        }else{
+                            recyclerView.setVisibility(View.GONE);
+                            binding.ivMessage.setVisibility(View.VISIBLE);
+                            binding.tvMensagem.setVisibility(View.VISIBLE);
+                            binding.tvMensagem.setText(R.string.no_result);
+                            binding.progressBar.setVisibility(View.GONE);
+                        }
+
                     }
 
                 }

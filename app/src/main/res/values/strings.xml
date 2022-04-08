@@ -16,4 +16,6 @@
     <string name="sexo_m">Sexo: M</string>
     <string name="user_name">user name</string>
     <string name="tv_hospital_name">Hospital Xpto</string>
+    <string name="escreva_o_indetificador_do_paciente_ou_nome_para_realizar_uma_pesquisa">Escreva o indetificador do paciente ou nome para realizar uma pesquisa</string>
+    <string name="no_result">Sem Resultados Para Sua Pesquisa</string>
 </resources>
