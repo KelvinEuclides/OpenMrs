@@ -38,7 +38,6 @@ public class OkHttpUtils {
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
             // Create an ssl socket factory with our all-trusting manager
             final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            okhttp3.Credentials.basic("username", "password");
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.sslSocketFactory(sslSocketFactory);
             builder.addInterceptor(new BasicAuthInterceptor("teste", "Teste@345"));

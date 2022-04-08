@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,30 +26,36 @@ public class SearchFragment extends Fragment {
 
     private FragmentSearchBinding binding;
     private ApiInterface apiInterface;
+    private Call<Results> call;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SearchViewModel homeViewModel =
-                new ViewModelProvider(this).get(SearchViewModel.class);
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Results> call = apiInterface.patient("kelvin","default",100);
+
 
 
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         RecyclerView recyclerView = binding.rvPatients;
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
+        binding.btSearch.setOnClickListener(v -> {
+            String query = binding.tiletSearch.getText().toString();
+            call = apiInterface.patient(query, "default", 100);
+            call.enqueue(new Callback<Results>() {
+                @Override
+                public void onResponse(Call<Results> call1, retrofit2.Response<Results> response) {
+                    if(response.isSuccessful()){
+                        Results resource = response.body();
+                        recyclerView.setAdapter(new MySearchRecyclerViewAdapter(resource));
+                    }
 
-        binding.btSearch.setOnClickListener(v -> call.enqueue(new Callback<Results>() {
-            @Override
-            public void onResponse(Call<Results> call1, retrofit2.Response<Results> response) {
-                Results resource = response.body();
-                recyclerView.setAdapter(new MySearchRecyclerViewAdapter(resource));
-            }
+                }
 
-            @Override
-            public void onFailure(Call<Results> call1, Throwable t) {
+                @Override
+                public void onFailure(Call<Results> call1, Throwable t) {
 
-            }
-        }));
+                }
+            });
+        });
 
         return binding.getRoot();
     }

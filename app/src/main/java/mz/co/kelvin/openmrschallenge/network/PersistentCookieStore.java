@@ -14,9 +14,9 @@ import java.util.List;
 
 public class PersistentCookieStore implements CookieStore {
 
- private final static String PREF_DEFAULT_STRING = "";
- private final static String PREFS_NAME = PersistentCookieStore.class.getName();
- private final static String PREF_SESSION_COOKIE = "session_cookie";
+    private final static String PREF_DEFAULT_STRING = "";
+    private final static String PREFS_NAME = PersistentCookieStore.class.getName();
+    private final static String PREF_SESSION_COOKIE = "session_cookie";
 
     private CookieStore mStore;
     private Context mContext;

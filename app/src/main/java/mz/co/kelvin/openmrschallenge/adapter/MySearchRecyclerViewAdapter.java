@@ -2,9 +2,12 @@ package mz.co.kelvin.openmrschallenge.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import mz.co.kelvin.openmrschallenge.databinding.ResultListItemBinding;
 import mz.co.kelvin.openmrschallenge.model.Results;
@@ -28,9 +31,13 @@ public class MySearchRecyclerViewAdapter extends RecyclerView.Adapter<MySearchRe
 
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
+          holder.tv_patient_name.setText(mValues.getResults().get(position).getDisplay());
+          holder.tv_patient_birtdate.setText(String.format("Data Nasc:%s Idade:%d", mValues.getResults().get(position).getPerson().getBirthdate(), mValues.getResults().get(position).getPerson().getAge()));
+          holder.tv_patient_sexo.setText("Sexo:"+mValues.getResults().get(position).getPerson().getGender());
+          holder.tv_patient_hospital.setText(mValues.getResults().get(position).getPerson().getPreferredAddress().getDisplay());
     }
 
     @Override
@@ -51,6 +58,7 @@ public class MySearchRecyclerViewAdapter extends RecyclerView.Adapter<MySearchRe
             tv_patient_birtdate =binding.tvPatientBirtdate;
             tv_patient_sexo = binding.tvPatientSexo;
             tv_patient_hospital =binding.tvPatientSexo;
+            Glide.with(binding.getRoot().getContext()).load("https://avatars.githubusercontent.com/u/20488304?s=96&v=4").circleCrop().into(binding.ivPatientPicture);
         }
 
         @Override
